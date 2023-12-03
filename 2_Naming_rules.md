@@ -60,3 +60,26 @@ val PersonComparator: Comparator<Person> = /*...*/
 ```
 
 enum 상수에서 사용에 따라 대문자로 구분된 이름 혹은 상위 카멜 케이스 이름 사용이 가능하다.
+
+## 백업 프로퍼티(속성) 이름
+
+만약 클래스가 하나는 공동 API의 일부이고 다른 하나는 구현 세부정보인 개념적으로 동일한 두개의 프로퍼티를 가진다면 private 프로퍼티의 이름 접두사에 밑줄을 사용해라.
+
+```kotlin
+class C {
+    private val _elementList = mutableListOf<Element>()
+
+    val elementList: List<Element>
+         get() = _elementList
+}
+```
+
+## 좋은 이름 선택하기
+
+클래스 이름은 보통 명사나 클래스가 무엇인지 설명하는 명사구이다. : List, PersonReader
+
+메서드 이름은 보통 동사나 메서드가 하는 것이 무엇인지 말하는 동사구이다. : close, readPersons. 이름은 객체 변환 혹은 새로운 객체를 반환한다면 또한 제안해야 한다. 예를 들어 sort는 공간에서 컬랙션을 정렬하는것이고 sorted는 컬랙션의 정렬된 복사본을 반환하는 것이다.
+
+이름은 개체의 목적이 무엇인지 명확하게 만들어야하므로  이름에 의미없는 단어(Manager, Wrapper)를 사용하는 것을 피하는 것이 좋다. 
+
+선언 이름의 일부로 약어를 사용할 때, 두개의 문자(IOStream)로 구성된다면 대문자로; 만약 길다면(XmlFormatter, HttpInputStream) 첫번째 글자만 대문자로 시작한다.
