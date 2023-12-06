@@ -124,3 +124,68 @@ class MyFavouriteVeryLongClassHolder :
 ```
 
 생성자 파라미터에서 일반 공백(4칸 공백)을 사용해라. 이렇게 하면 주요한 생성자에서 선언된 프로퍼티들이 클래스 본문에서 선언된 프로퍼티와 동일한 들여쓰기를 가진다.
+
+## 수정자 순서
+
+만약 선언이 여러 개의 수정자를 가진다면 항상 아래의 순서로 두어야 한다. 
+
+```kotlin
+public / protected / private / internal
+expect / actual
+final / open / abstract / sealed / const
+external
+override
+lateinit
+tailrec
+vararg
+suspend
+inner
+enum / annotation / fun // as a modifier in `fun interface`
+companion
+inline / value
+infix
+operator
+data
+```
+
+모든 어노테이션을 수정자 전에 두어라.
+
+```kotlin
+@Named("Foo")
+private val foo: Foo
+```
+
+라이브러리에서 작업을 하지 않는다면 중복된 수정자는 생략해라(예를 들면 `public` )
+
+## 어노테이션
+
+어노테이션은 선언 전에 위치하고 같은 들여쓰기로 별도의 줄에 둔다.
+
+```kotlin
+@Target(AnnotationTarget.PROPERTY)
+annotation class JsonExclude
+```
+
+인자가 없는 어노테이션은 같은 줄에도 가능하다.
+
+```kotlin
+@JsonExclude @JvmField
+var x: String
+```
+
+인자가 없는 단일 어노테이션은 해당 선언과 같은 줄에 둘 수 있다. 
+
+```kotlin
+@Test fun foo() { /*...*/ }
+```
+
+## 파일 어노테이션
+
+파일 어노테이션은 파일 어노테이션(있는 경우) 뒤, package 문 전에 위치하며 패키지와 빈 줄로 구분된다. (파일 대상이며 패키지에 대한 대상이 아닌 것을 강조하기 위해)
+
+```kotlin
+/** License, copyright and whatever */
+@file:JvmName("FooBar")
+
+package foo.bar
+```
