@@ -189,3 +189,37 @@ var x: String
 
 package foo.bar
 ```
+
+## 메소드
+
+메소드의 시그니처가 단일 줄에 맞지 않는 경우 아래와 같은 문법을 사용해라. 
+
+```kotlin
+fun longMethodName(
+    argument: ArgumentType = defaultValue,
+    argument2: AnotherArgumentType,
+): ReturnType {
+    // body
+}
+```
+
+메소드 파라미터는 일반적인 들여쓰기(4칸 공백)를 사용해라.  생성자 파라미터와 일관성을 보장하는데에 도움이 된다. 
+
+본문이 단일 표현식으로 구성된 메소드에는 표현식 본을 사용하는 것이 좋다.  
+
+```kotlin
+fun foo(): Int {     // bad
+    return 1
+}
+
+fun foo() = 1        // good
+```
+
+## 표현식 본문
+
+만약 함수가 선언과 같은 줄에 들어가지 않는 경우, = 표시를 첫번째 줄에 두고 표현식 분문을  4개의 공백으로 들여쓰기 해라. 
+
+```kotlin
+fun f(x: String, y: String, z: String) =
+    veryLongFunctionCallWithManyWords(andLongParametersToo(), x, y, z)
+```
