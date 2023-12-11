@@ -223,3 +223,78 @@ fun foo() = 1        // good
 fun f(x: String, y: String, z: String) =
     veryLongFunctionCallWithManyWords(andLongParametersToo(), x, y, z)
 ```
+
+## 속성
+
+매우 간단한, 읽기 전용 속성은 한 줄에 포맷 하는 것을 고려해라.
+
+```kotlin
+val isEmpty: Boolean get() = size == 0
+```
+
+더 복잡한 속성은 항상 get과 set 키워드를 별도의 줄에 두어야 한다. 
+
+```kotlin
+val foo: String
+    get() { /*...*/ }
+```
+
+초기 값이 있는 속성에서 만약 초기 값이 길다면 `=` 기호 뒤에 줄 바꿈을 추가하고 4칸 공백으로 초기 값을 들여쓰기 해라 
+
+```kotlin
+private val defaultCharset: Charset? =
+    EncodingRegistry.getInstance().getDefaultCharsetForPropertiesFiles(file)
+```
+
+## 제어 흐름문
+
+`if`혹은 `when` 문 조건이 여러 줄이라면 항상 중괄호를 본문 주변에 사용해야 한다. 조건의 각 다음 줄은 시작문과 비교하여 4칸 공백으로 들여쓰기를 해야 한다. 조건의 닫는 괄호는 구분된 줄에 열린 괄호와 함께  두어야 한다. 
+
+```kotlin
+if (!component.isSyncing &&
+    !hasAnyKotlinRuntimeInScope(module)
+) {
+    return createKotlinNotConfiguredPanel(module)
+}
+```
+
+이것은 조건과 문의 본문을 정렬하는 데에 도움을 준다. 
+
+`else`, `catch`, `finally` 키워드와 `do-while` 반복문의  while 키워드 또한 이전 중괄호와 같은 줄에 두어야 한다. 
+
+```kotlin
+if (condition) {
+    // body
+} else {
+    // else part
+}
+
+try {
+    // body
+} finally {
+    // cleanup
+}
+```
+
+`when` 문에서 분기가 한 줄보다 더 많은 경우, 인접 케이스 블럭으로부터 빈 줄로 분리하는 것을 고려해라.
+
+```kotlin
+private fun parsePropertyValue(propName: String, token: Token) {
+    when (token) {
+        is Token.ValueToken ->
+            callback.visitValue(propName, token.value)
+
+        Token.LBRACE -> { // ...
+        }
+    }
+}
+```
+
+짧은 분기는 중괄호 없이 조건과 같은 줄에 두어라. 
+
+```kotlin
+when (foo) {
+    true -> bar() // good
+    false -> { baz() } // bad
+}
+```
