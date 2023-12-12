@@ -298,3 +298,82 @@ when (foo) {
     false -> { baz() } // bad
 }
 ```
+
+## 메서드 호출
+
+긴 인자 목록에서, 열란 괄호 뒤에 줄 바꿈을 해라. 4칸 공백으로 인자 들여쓰기를 해라. 매우 관련있는 여러 인자는 같은 줄에 그룹화해라. 
+
+```kotlin
+drawSquare(
+    x = 10, y = 10,
+    width = 100, height = 100,
+    fill = true
+)
+```
+
+인자 이름과 값 사 구분되는 `=` 기호 주변에 공백을 두어라. 
+
+## 연결된 호출 감싸기
+
+연결된 호출을 감쌀 때, . 문자 혹은 ?. 연산자를 단일 들여쓰기와 함께 다음 줄에 두어라.
+
+ 
+
+```kotlin
+val anchor = owner
+    ?.firstChild!!
+    .siblings(forward = true)
+    .dropWhile { it is PsiComment || it is PsiWhiteSpace }
+```
+
+체인에서 첫번째 호출은 보통 그 전에 줄 바꿈을 가져야하고, 하지만 그 방법이 더 의미가 있다면 생략해도 괜찮다. 
+
+## 람다
+
+람다 표현에서 공백은 중괄호 주변, 본문에서 매개변수를 구분하는 화살표 주변에도 사용되어야 한다. 만약 호출이 단일 람다라면 가능한 괄호 밖으로 넘긴다. 
+
+```kotlin
+list.filter { it > 10 }
+```
+
+만약 람다에 레이블을 지정하는 경우 라벨과 여는 중괄호 사이에 공백을 두지 마라. 
+
+```kotlin
+fun foo() {
+    ints.forEach lit@{
+        // ...
+    }
+}
+```
+
+여러줄로 이루어진 람다에서 매개변수 이름을 선언할 때, 첫번째 줄에 이름을 두고 화살표와 줄바꿈을 추가해라. 
+
+```kotlin
+appendCommaSeparated(properties) { prop ->
+    val propertyValue = prop.get(obj)  // ...
+}
+```
+
+만약 매개변수 목록이 한 줄에 맞지 않을 정도로 긴 경우, 구분된 줄에 화살표를 두어라. 
+
+## Trailing commas(마지막 쉼표)
+
+마지막 쉼표는 요소들 시리즈에서 마지막 항목 뒤에 있는 쉼표이다.
+
+```kotlin
+class Person(
+    val firstName: String,
+    val lastName: String,
+    val age: Int, // trailing comma
+)
+```
+
+마지막 쉼표를 사용하는 것은 여러 이점을 가진다. 
+
+- 모든 초점은 변경된 값에 집중되어 버전 관리 차이점이 더 깔끔해진다.
+- 요소를 조작하여 쉼표를 추가하거나 삭제할 필요 없이 쉽게 추가하고 순서를 바꿀 수 있다.
+- 예를 들어 코드 생성을 단순하게 한다. 마지막 요소는 또한 쉼표를 가질 수 있다.
+
+마지막 쉼표는 전체적으로 선택적이다. - 코드는 여전히 마지막 쉼표없이 작동이 될 것이다. 코틀린 스타일 가이드는 선언된 위치에서 마지막 쉼표를 사용하도록 하고 호출 위치에서  자율에 그것을 맡긴다. 
+
+IntelliJ IDEA 포멧터에서 마지막 쉼표를 사용 가능하게 하려면 **Settings/Preferences | Editor | Code Style | Kotlin** 으로 가서 **Other** 탭을 열고 **Use trailing comma** 옵션을 선택해라. 
