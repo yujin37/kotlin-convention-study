@@ -45,3 +45,52 @@ typealias PersonIndex = Map<String, Person>
 ```
 
 만약 이름 충돌을 피하기 위해 비공개(private) 혹은 내부(internal) 타입 별칭을 사용한다면 패키지(Packages) 및 임포트(Imports) 에서 `import … as …`로 사용하는 것이 좋다.
+
+## 람다 매개변수
+
+짧고 중복되지 않은 람다식에서는 명시적으로 매개변수를 선언하는 대신에 `it` 규칙을 사용하는 것을 추천한다. 매개변수를 가진 중첩된 람다식에서는 항상 명시적으로 파라미터를 선언해야 한다. 
+
+## 람다식에서의 반환문
+
+람다식에서 여러 레이블이 사용된 반환문을 피해라. 람다식을 재구조화하여 단일 종료 지점을 가지는 것을 고려하는 것이 좋다. 만약 불가능하거나 충분히 명확하지 않다면 람다식을 익명함수로 전환하는 것을 고려해라. 
+
+람다식에서 마지막 문장을 레이블이 지정된 반환문을 사용하지 마라.
+
+## 명명된 인자
+
+여러 원시 타입 매개변수를 가지는 메서드나 Boolean 유형의 매개변수가 있는 경우,  매개변수의 의미가 문맥으로부터 명확하게 이해되지 않는다면 명명된 인자 구문을 사용해라. 
+
+```kotlin
+drawSquare(x = 10, y = 10, width = 100, height = 100, fill = true)
+```
+
+## 조건문
+
+try, if, when 표현 형태를 사용하는 것이 좋다. 
+
+```kotlin
+return if (x) foo() else bar()
+```
+
+```kotlin
+return when(x) {
+    0 -> "zero"
+    else -> "nonzero"
+}
+```
+
+위의 방식이 더 선호된다.
+
+```kotlin
+if (x)
+    return foo()
+else
+    return bar()
+```
+
+```kotlin
+when(x) {
+    0 -> return "zero"
+    else -> return "nonzero"
+}
+```
