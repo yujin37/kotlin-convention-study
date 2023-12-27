@@ -188,3 +188,48 @@ fun main() {
 두개의 객체가 비슷한 역할로 작동할 때만 함수 선언을 `infix`로 해라. 좋은 예: `and`, `to`, `zip`. 나쁜 예: `add`
 
 만약 리시버 객체가 변화하는 경우 `infix`로서 메서드 선언하지 마라.
+
+## 팩토리 함수
+
+만약 클래스에 대한 팩토리 함수를 선언할 경우, 클래스 자체와  동일한 이름을 사용하는 것을 피해라. 고유한 이름을 사용한다면 팩토리 함수의 동작이 특별한 이유가 명확해진다. 오직 특별한 의미가 없을 경우에만 클래스와 동일한 이름을 사용할 수 있다. 
+
+```kotlin
+class Point(val x: Double, val y: Double) {
+    companion object {
+        fun fromPolar(angle: Double, radius: Double) = Point(...)
+    }
+}
+```
+
+만약 여러개의 오버로드된 구조를 가진 생성자를 가진다면 서로 다른 슈퍼클래스를 호출하지 않고 기본 인수 값으로 단일 생성자로 줄일 수 없다면 오버로딩된 생성자 대신 여러개의  팩토리 함수를 가진 오버로드된 구조로 대체하는 것이 좋다. 
+
+## 플랫폼 타입
+
+플랫폼 타입의 표현식을 반환하는 공개 함수/메서드는 코틀린 형식을 명시적으로 선언해야 한다. 
+
+```kotlin
+fun apiCall(): String = MyJavaApi.getProperty("name")
+```
+
+플랫폼 타임의 표현식으로 초기화된 모든 속성(패키지 레벨 혹은 클래스 레벨)은 코틀린 형식을 명시적으로 선언해야 한다. 
+
+```kotlin
+class Person {
+    val name: String = MyJavaApi.getProperty("name")
+}
+```
+
+플랫폼 타입의 표현식으로 초기화된 지역 변수는 형식 선언을 가져도 되고 아니여도 된다. 
+
+```kotlin
+fun main() {
+    val name = MyJavaApi.getProperty("name")
+    println(name)
+}
+```
+
+## 스코프 함수 apply/with/run/also/let
+
+코틀린은 주어진 객체의 컨텍스트에서 코드 블럭을 실행하는 함수 세트를 제공한다: `let`, `run`, `with`, `apply`, `also` 
+
+케이스에 적합한 스코프 기능을 선택할 수 있도록 가이드를 제공하는데 [Scope Functions](https://kotlinlang.org/docs/scope-functions.html)를 참고해라.
