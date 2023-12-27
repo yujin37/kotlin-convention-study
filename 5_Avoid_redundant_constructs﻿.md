@@ -7,7 +7,7 @@
 Unit으로 반환하는 함수의 경우, 반환 타입을 생략해야 한다. 
 
 ```kotlin
-fun foo() { // ": Unit" is omitted here
+fun foo() { // ": Unit" 은 여기서 생략되었다.
 
 }
 ```
