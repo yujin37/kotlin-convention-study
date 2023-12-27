@@ -4,33 +4,33 @@
 
 ```kotlin
 /**
- * This is a documentation comment
- * on multiple lines.
+ * 이것은 여러 줄에서 
+ * 문서 주석입니다. 
  */
 ```
 
 짧은 주석은 단일 줄에 위치할 수 있다. 
 
 ```kotlin
-/** This is a short documentation comment. */
+/** 이것은 짧은 문서 주석입니다.  */
 ```
 
 일반적으로 `@param`과 `@return` 태그를 사용하는 것을 피해라. 대신에, 매개변수와 반환 값 설명을 문서 주석에 직접적으로 포함시키고 언급할 때마다 매개변수에 링크를 추가해라. `@param`과 `@return` 는 긴 설명이 요구되고 본문 내용의 흐름에 맞지 않을 때에만 사용해라. 
 
 ```kotlin
-// Avoid doing this:
+// 이것을 피하기 위해 :
 
 /**
- * Returns the absolute value of the given number.
- * @param number The number to return the absolute value for.
- * @return The absolute value.
+ * 지정된 숫자의 절대값을 반환한다. 
+ * @param number 절대값을 반환한 숫자이다.
+ * @return 절대값이다. 
  */
 fun abs(number: Int): Int { /*...*/ }
 
-// Do this instead:
+// 이것 대신에 :
 
 /**
- * Returns the absolute value of the given [number].
+ * 지정된 [숫자]의 절대값을 반환한다.
  */
 fun abs(number: Int): Int { /*...*/ }
 ```
