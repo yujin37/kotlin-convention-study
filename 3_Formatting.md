@@ -140,7 +140,7 @@ tailrec
 vararg
 suspend
 inner
-enum / annotation / fun // as a modifier in `fun interface`
+enum / annotation / fun // fun 인터페이스의 수정자로서 
 companion
 inline / value
 infix
@@ -184,7 +184,7 @@ var x: String
 파일 어노테이션은 파일 어노테이션(있는 경우) 뒤, package 문 전에 위치하며 패키지와 빈 줄로 구분된다. (파일 대상이며 패키지에 대한 대상이 아닌 것을 강조하기 위해)
 
 ```kotlin
-/** License, copyright and whatever */
+/** 라이선스, 저작권 등  */
 @file:JvmName("FooBar")
 
 package foo.bar
@@ -208,11 +208,11 @@ fun longMethodName(
 본문이 단일 표현식으로 구성된 메소드에는 표현식 본을 사용하는 것이 좋다.  
 
 ```kotlin
-fun foo(): Int {     // bad
+fun foo(): Int {     // 나쁜 예
     return 1
 }
 
-fun foo() = 1        // good
+fun foo() = 1        // 좋은 예 
 ```
 
 ## 표현식 본문
@@ -264,15 +264,15 @@ if (!component.isSyncing &&
 
 ```kotlin
 if (condition) {
-    // body
+    // 본문 
 } else {
-    // else part
+    // 그외 부븐 
 }
 
 try {
-    // body
+    // 본문 
 } finally {
-    // cleanup
+    // 정리 
 }
 ```
 
@@ -294,8 +294,8 @@ private fun parsePropertyValue(propName: String, token: Token) {
 
 ```kotlin
 when (foo) {
-    true -> bar() // good
-    false -> { baz() } // bad
+    true -> bar() // 좋은 예 
+    false -> { baz() } // 나쁜 예 
 }
 ```
 
@@ -364,7 +364,7 @@ appendCommaSeparated(properties) { prop ->
 class Person(
     val firstName: String,
     val lastName: String,
-    val age: Int, // trailing comma
+    val age: Int, // 마지막 쉼표 
 )
 ```
 
